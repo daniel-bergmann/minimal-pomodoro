@@ -40,8 +40,13 @@ const pauseTimer = () => {
 
 const resetTimer = () => {
   clearInterval(countdown)
-  timerDisplay.textContent = "25:00"
-  remainingTime = 0
+  const selectedTime = parseInt(timeSelect.value)
+  const minutes = Math.floor(selectedTime / 60)
+  const remainderSeconds = selectedTime % 60
+  timerDisplay.textContent = `${minutes}:${
+    remainderSeconds < 10 ? "0" : ""
+  }${remainderSeconds}`
+  remainingTime = timeSelect.value
 }
 
 // evenrt listeners

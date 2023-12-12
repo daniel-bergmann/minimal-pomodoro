@@ -2,24 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://unpkg.com/basilcss@latest/basil.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pomodoro</title>
+    <style>
+      body {
+        background-color: #000000;
+        color: rgb(228, 228, 228);
+        font-family: "Roboto", sans-serif;
+      }
+      #timer {
+        font-size: 100px;
+      }
+    </style>
   </head>
   <body>
-    <div id="pomodoro-app">
-      <select id="time-select">
+    <main id="pomodoro-app" class="flex-col-justifyCenter-alignCenter vh-100">
+      <select id="time-select" class="m-b-2">
         <option value="1500">25 minutes</option>
         <option value="300">5 minutes</option>
         <option value="600">10 minutes</option>
       </select>
-      <div id="timer">
+      <div id="timer" class="m-b-2">
         <span id="minutes">25</span>:<span id="seconds">00</span>
       </div>
-      <button id="start">Start</button>
-      <button id="pause">Pause</button>
-      <button id="reset">Reset</button>
-    </div>
+      <div>
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="reset">Reset</button>
+      </div>
+    </main>
     <audio id="bell" src="tibetan-bell.wav"></audio>
   </body>
   <script src="app.js"></script>

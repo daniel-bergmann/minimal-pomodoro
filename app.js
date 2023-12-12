@@ -8,6 +8,9 @@ const resetButton = document.querySelector("#reset")
 const timeSelect = document.querySelector("#time-select")
 const bell = document.querySelector("#bell")
 
+// Request permission to show notifications
+Notification.requestPermission()
+
 const timer = (seconds) => {
   clearInterval(countdown)
 
@@ -20,7 +23,12 @@ const timer = (seconds) => {
     if (secondsLeft < 0) {
       clearInterval(countdown)
       if (isBreak) {
+        // play bell sound
         bell.play()
+        // display notification
+        new Notification("Time for a break!", {
+          body: "Step up and stretch your legs!",
+        })
       }
       isBreak = !isBreak
       remainingTime = isBreak ? 300 : 1500

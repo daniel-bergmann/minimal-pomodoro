@@ -7,15 +7,21 @@ const pauseButton = document.querySelector("#pause")
 const resetButton = document.querySelector("#reset")
 const timeSelect = document.querySelector("#time-select")
 const bell = document.querySelector("#bell")
+const buttonSound = document.querySelector("#button-click-sound")
 
 // Request permission to show notifications
 Notification.requestPermission()
 
 const timer = (seconds) => {
+  // Hiding the start button and showing the pause button
+  startButton.style.display = "none"
+  pauseButton.style.display = "block"
+  // Show the reset button
+  resetButton.style.display = "block"
   clearInterval(countdown)
 
   const now = Date.now()
-  const then = now + seconds * 2
+  const then = now + seconds * 1000
   displayTimeLeft(seconds)
 
   countdown = setInterval(() => {
@@ -50,6 +56,9 @@ const displayTimeLeft = (seconds) => {
 }
 
 const pauseTimer = () => {
+  // Showing the start button and hiding the pause button
+  startButton.style.display = "block"
+  pauseButton.style.display = "none"
   clearInterval(countdown)
   remainingTime = timerDisplay.textContent
     .split(":")
@@ -65,13 +74,25 @@ const resetTimer = () => {
     remainderSeconds < 10 ? "0" : ""
   }${remainderSeconds}`
   remainingTime = timeSelect.value
+  // only show the start button
+  startButton.style.display = "block"
 }
 
-// evenrt listeners
-startButton.addEventListener("click", () => timer(remainingTime || 1500))
-pauseButton.addEventListener("click", pauseTimer)
-resetButton.addEventListener("click", resetTimer)
+buttonSound.volume = 0.5
+startButton.addEventListener("click", () => {
+  buttonSound.play()
+  timer(remainingTime || 1500)
+})
+pauseButton.addEventListener("click", () => {
+  buttonSound.play()
+  pauseTimer()
+})
+resetButton.addEventListener("click", () => {
+  buttonSound.play()
+  resetTimer()
+})
 timeSelect.addEventListener("change", () => {
+  clearInterval(countdown)
   remainingTime = timeSelect.value
   displayTimeLeft(remainingTime)
 })

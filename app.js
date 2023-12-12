@@ -1,10 +1,12 @@
 let countdown
 let remainingTime = 0
+let isBreak = false
 const timerDisplay = document.querySelector("#timer")
 const startButton = document.querySelector("#start")
 const pauseButton = document.querySelector("#pause")
 const resetButton = document.querySelector("#reset")
 const timeSelect = document.querySelector("#time-select")
+const bell = document.querySelector("#bell")
 
 const timer = (seconds) => {
   clearInterval(countdown)
@@ -17,6 +19,12 @@ const timer = (seconds) => {
     const secondsLeft = Math.round((then - Date.now()) / 1000)
     if (secondsLeft < 0) {
       clearInterval(countdown)
+      if (isBreak) {
+        bell.play()
+      }
+      isBreak = !isBreak
+      remainingTime = isBreak ? 300 : 1500
+      displayTimeLeft(remainingTime)
       return
     }
     displayTimeLeft(secondsLeft)

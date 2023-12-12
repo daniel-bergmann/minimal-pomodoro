@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://unpkg.com/basilcss@latest/basil.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro</title>
+  </head>
+  <body>
+    <div id="pomodoro-app">
+      <select id="time-select">
+        <option value="1500">25 minutes</option>
+        <option value="300">5 minutes</option>
+        <option value="600">10 minutes</option>
+      </select>
+      <div id="timer">
+        <span id="minutes">25</span>:<span id="seconds">00</span>
+      </div>
+      <button id="start">Start</button>
+      <button id="pause">Pause</button>
+      <button id="reset">Reset</button>
+    </div>
+  </body>
+  <script>
+    let countdown
+    let remainingTime = 0
+    const timerDisplay = document.querySelector("#timer")
+    const startButton = document.querySelector("#start")
+    const pauseButton = document.querySelector("#pause")
+    const resetButton = document.querySelector("#reset")
+
+    const timer = (seconds) => {
+      clearInterval(countdown)
+
+      const now = Date.now()
+      const then = now + seconds * 1000
+      displayTimeLeft(seconds)
+
+      countdown = setInterval(() => {
+        const secondsLeft = Math.round((then - Date.now()) / 1000)
+        if (secondsLeft < 0) {
+          clearInterval(countdown)
+          return
+        }
+        displayTimeLeft(secondsLeft)
+      }, 1000)
+    }
+
+    const displayTimeLeft = (seconds) => {
+      const minutes = Math.floor(seconds / 60)
+      const remainderSeconds = seconds % 60
+      timerDisplay.textContent = `${minutes}:${
+        remainderSeconds < 10 ? "0" : ""
+      }${remainderSeconds}`
+    }
+
+    const pauseTimer = () => {
+      clearInterval(countdown)
+      remainingTime = timerDisplay.textContent
+        .split(":")
+        .reduce((acc, time) => 60 * acc + +time)
+    }
+
+    const resetTimer = () => {
+      clearInterval(countdown)
+      timerDisplay.textContent = "25:00"
+      remainingTime = 0
+    }
+
+    startButton.addEventListener("click", () => timer(remainingTime || 1500))
+    pauseButton.addEventListener("click", pauseTimer)
+    resetButton.addEventListener("click", resetTimer)
+  </script>
+</html>

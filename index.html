@@ -2,32 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍅</text></svg>"
+    />
     <link rel="stylesheet" href="https://unpkg.com/basilcss@latest/basil.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pomodoro</title>
     <style>
       body {
         background-color: #000000;
-        color: rgb(228, 228, 228);
+        color: #fff;
         font-family: "Roboto", sans-serif;
       }
       #timer {
         font-size: 100px;
       }
+
+      button {
+        padding: 15px;
+        border: none;
+        margin: 10px;
+        border-radius: 4px;
+      }
+      button:hover {
+        cursor: pointer;
+        color: #fff;
+        background-color: #000;
+      }
     </style>
   </head>
   <body>
     <main id="pomodoro-app" class="flex-col-justifyCenter-alignCenter vh-100">
-      <select id="time-select" class="m-b-2">
+      <h1 class="m-b-2">🍅</h1>
+      <select id="time-select" class="m-b-4">
         <option value="1500">25 minutes</option>
         <option value="300">5 minutes</option>
         <option value="600">10 minutes</option>
       </select>
-      <div id="timer" class="m-b-2">
+      <div id="timer" class="m-b-1">
         <span id="minutes">25</span>:<span id="seconds">00</span>
       </div>
       <div>

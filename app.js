@@ -15,7 +15,7 @@ const timer = (seconds) => {
   clearInterval(countdown)
 
   const now = Date.now()
-  const then = now + seconds * 1000
+  const then = now + seconds * 2
   displayTimeLeft(seconds)
 
   countdown = setInterval(() => {
@@ -42,9 +42,11 @@ const timer = (seconds) => {
 const displayTimeLeft = (seconds) => {
   const minutes = Math.floor(seconds / 60)
   const remainderSeconds = seconds % 60
-  timerDisplay.textContent = `${minutes}:${
+  const display = `${minutes}:${
     remainderSeconds < 10 ? "0" : ""
   }${remainderSeconds}`
+  timerDisplay.textContent = display
+  document.title = display
 }
 
 const pauseTimer = () => {
